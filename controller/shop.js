@@ -149,12 +149,6 @@ router.put(
   upload.single("image"),
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const existsUser = await Shop.findById(req.seller._id);
-
-      const existAvatarPath = `uploads/${existsUser.avatar}`;
-
-      fs.unlinkSync(existAvatarPath);
-
       const fileUrl = path.join(req.file.filename);
 
       const seller = await Shop.findByIdAndUpdate(req.seller._id, {
